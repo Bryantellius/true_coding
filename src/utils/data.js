@@ -137,50 +137,65 @@ const data = [
   ),
   new QandA(
     (
-      <span>
-        What is y if <br />
-        <code>let x = 4; let y = 10 + x;</code>?
-      </span>
+      <div>
+        <span>What is y if</span>
+        <br />
+        <pre>
+          <code>let x = 4;{"\n"}let y = 10 + x;</code>
+        </pre>
+      </div>
     ),
     "14",
     "JS Operators"
   ),
   new QandA(
     (
-      <span>
-        What is y if <br />
-        <code>let x = 21; let y = 10 - x;</code>?
-      </span>
+      <div>
+        <span>What is y if</span>
+        <br />
+        <pre>
+          <code>let x = 21;{"\n"}let y = 10 - x;</code>
+        </pre>
+      </div>
     ),
     "-11",
     "JS Operators"
   ),
   new QandA(
     (
-      <span>
-        What is y if <br />
-        <code>let x = 2; let y = x ** 6;</code>?
-      </span>
+      <div>
+        <span>What is y if</span>
+        <br />
+        <pre>
+          <code>let x = 2;{"\n"}let y = x ** 6;</code>
+        </pre>
+      </div>
     ),
     "64",
     "JS Operators"
   ),
   new QandA(
     (
-      <span>
-        What is y if <br />
-        <code>let x = 8; let y = 64 / x;</code>?
-      </span>
+      <div>
+        <span>What is y if</span>
+        <br />
+        <pre className="my-2">
+          <code>let x = 8;{"\n"}let y = 64 / x;</code>
+        </pre>
+      </div>
     ),
     "8",
     "JS Operators"
   ),
   new QandA(
     (
-      <span>
-        What is y if <br />
-        <code>let x = 2; let y = 11 % x;</code>?
-      </span>
+      <div>
+        <span>What is y if</span>
+        <br />
+        <pre>
+          <code>let x = 2;{"\n"}let y = 11 % x;</code>
+        </pre>
+      </div>
     ),
     "1",
     "JS Operators"

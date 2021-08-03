@@ -18,6 +18,16 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+  color: deepskyblue !important;
+  text-align: left !important;
+  width: 100%;
+}
+
+pre {
+  background-color: #1d2d50;
+  padding: 0.5rem;
+  width: 100%;
+  text-align: left !important;
 }
 
 strong {
@@ -83,6 +93,7 @@ strong {
 
 .q-card {
   max-width: 550px;
+  min-width: 450px;
 }
 
 .cat {
@@ -121,6 +132,9 @@ strong {
   }
   .show {
     left: 0% !important;
+  }
+  .q-card {
+    min-width: 310px;
   }
 }
 

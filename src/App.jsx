@@ -146,10 +146,10 @@ function App() {
               <small className="small border-bottom border-dark">
                 Question
               </small>
-              <p className="card-title my-3 h3">{qa.displayQ()}</p>
+              <div className="card-title my-3 h3">{qa.displayQ()}</div>
               <hr />
               <span className="badge badge-warning cat">
-                {qa.sensitive ? "CASE SENSITIVE" : ""}
+                {qa.sensitive ? "CS" : ""}
               </span>
               <small className="small border-bottom border-dark">Answer</small>
               <form className="input-group my-3" onSubmit={checkAnswer}>
