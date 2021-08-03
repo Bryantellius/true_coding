@@ -1,16 +1,23 @@
 export class QandA {
-  constructor(q, a) {
+  constructor(q, a, category = "general", sensitive = true) {
     this.q = q;
     this.a = a;
+    this.cat = category;
+    this.sensitive = sensitive;
   }
 
   evaluateAnswer(a) {
-    return a === this.a
+    return (this.sensitive ? a : a.toLowerCase()) ===
+      (this.sensitive ? this.a : this.a.toLowerCase())
       ? "Correct!"
       : `Incorrect. The correct answer was '${this.a}'.`;
   }
 
   displayQ() {
     return this.q;
+  }
+
+  displayCat() {
+    return this.cat;
   }
 }

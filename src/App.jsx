@@ -1,7 +1,8 @@
+/* eslint-disable eqeqeq */
 import { useState } from "react";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./App.css";
-import logo from "./assets/TCLogoOnly.png"
+import logo from "./assets/TCLogoOnly.png";
 import data from "./utils/data";
 
 let screenWidth = window.screenX;
@@ -47,7 +48,11 @@ function App() {
           </span>
         </div>
       </nav>
-      <button className="sidebar_icon pointer" aria-label="Toggle menu" onClick={() => toggleSidebar(true)}>
+      <button
+        className="sidebar_icon pointer"
+        aria-label="Toggle menu"
+        onClick={() => toggleSidebar(true)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -67,7 +72,9 @@ function App() {
       </button>
       <div className="d-flex h-90vh">
         {/* Sidebar */}
-        <aside className={`container__sidebar my-1 ${showSidebar ? "show" : ""}`}>
+        <aside
+          className={`container__sidebar my-1 ${showSidebar ? "show" : ""}`}
+        >
           <p
             className={`text-end pointer p-1 ${showSidebar ? "" : "hidden"}`}
             onClick={() => toggleSidebar(false)}
@@ -93,7 +100,9 @@ function App() {
             {data.map((q, idx) => (
               <li
                 key={idx}
-                className={`list-group-item side_item px-4 text-start ${currentIndex == idx ? "border-info border border-2" : ""}`}
+                className={`list-group-item side_item px-4 text-start ${
+                  currentIndex == idx ? "border-info border border-2" : ""
+                }`}
                 onClick={(e) => resetIndicators(idx)}
               >
                 <svg
@@ -119,23 +128,29 @@ function App() {
         {/* Main Column */}
         <main className="container__main d-flex justify-content-center align-items-center h-100">
           <div className="q-card card text-dark shadow-lg">
-            <div className="card-header bgLight">
+            <div className="card-header bg-light">
               <p
                 className={`alert ${
                   showFeedback
                     ? feedback.startsWith("Correct")
                       ? "alert-success"
                       : "alert-danger"
-                    : "h-0"
+                    : "h-0 p-0"
                 }`}
               >
                 {feedback}
               </p>
             </div>
             <div className="card-body">
-              <p className="card-title h3">{qa.displayQ()}</p>
+              <small className="small border-bottom border-dark">
+                Question
+              </small>
+              <p className="card-title my-3 h3">{qa.displayQ()}</p>
               <hr />
-              <form className="input-group" onSubmit={checkAnswer}>
+              <small className="small border-bottom border-dark">
+                Answer
+              </small>
+              <form className="input-group my-3" onSubmit={checkAnswer}>
                 <input
                   type="text"
                   name="answer"
