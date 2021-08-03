@@ -85,6 +85,28 @@ strong {
   max-width: 550px;
 }
 
+.cat {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.75rem;
+}
+
+.badge-primary {
+  background-color: var(--primary);
+}
+
+.badge-warning {
+  background-color: darkgoldenrod;
+}
+
+.badge-danger {
+  background-color: tomato;
+}
+
+.p-rel {
+  position: relative;
+}
+
 @media (max-width: 750px) {
   .container__sidebar {
     width: 90%;

@@ -141,15 +141,17 @@ function App() {
                 {feedback}
               </p>
             </div>
-            <div className="card-body">
+            <div className="card-body p-rel">
+              <span className="badge badge-primary cat">{qa.displayCat()}</span>
               <small className="small border-bottom border-dark">
                 Question
               </small>
               <p className="card-title my-3 h3">{qa.displayQ()}</p>
               <hr />
-              <small className="small border-bottom border-dark">
-                Answer
-              </small>
+              <span className="badge badge-warning cat">
+                {qa.sensitive ? "CASE SENSITIVE" : ""}
+              </span>
+              <small className="small border-bottom border-dark">Answer</small>
               <form className="input-group my-3" onSubmit={checkAnswer}>
                 <input
                   type="text"
