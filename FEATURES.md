@@ -2,6 +2,9 @@
 
 ## Next Up
 
+- In-browser editor component [!]
+  - Practice problems
+  - Tests
 - MORE QUESTIONS
 - Change Data storage (it will quickly become unruly where it is)
 - Category filtering

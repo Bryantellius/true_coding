@@ -1,3 +1,16 @@
+<p align="center">
+<a href="https://truecoders.io">
+<img src="src/assets/TCLogoOnly.png" width="250" />
+</a>
+</p>
+
+<h1 align="center" style="border-bottom: none !important; margin-bottom: 5px !important;"><a href="https://truecoders.io/">TrueCoders</a></h1>
+<p align="center">
+  <a href="#">
+    <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" />
+  </a>
+</p>
+
 # TrueCoders - True Coding App
 
 ## Contribution
