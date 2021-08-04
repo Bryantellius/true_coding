@@ -3,7 +3,7 @@
 }
 
 * {
-  transition: all 0.5s;
+  transition: all 0.25s;
 }
 
 body {
@@ -94,6 +94,10 @@ strong {
 .q-card {
   width: 550px;
   min-height: 400px;
+}
+
+.editor * {
+  transition: none;
 }
 
 .cat {

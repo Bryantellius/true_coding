@@ -54,7 +54,7 @@ export const getGeneratedPageURL = ({ html, css, js }, editorMode) => {
 
   const cssURL = getBlobURL(
     editorMode === "javascript"
-      ? `html {background-color: black; color: #eee; font-size: 24px; width: 100%; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;} p {margin: 0px 0px 5px 0px; color: #b8b803}`
+      ? `html {background-color: black; color: #eee; font-size: 24px; width: 100%; font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif;} p {margin: 0px 0px 5px 0px; color: #0094c8}`
       : css + " html {background-color: white; width: 100%;}",
     "text/css"
   );

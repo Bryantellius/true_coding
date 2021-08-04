@@ -21,3 +21,25 @@ export class QandA {
     return this.cat;
   }
 }
+
+export class JSChallenge {
+  constructor(q, test, tags = []) {
+    this.q = q;
+    this.test = test;
+    this.tags = tags;
+  }
+
+  evaluateAnswer(a) {
+    return `\nRESULT: ${a(...this.test.params) || "No returned value :/"}`;
+  }
+
+  displayQ() {
+    return this.q;
+  }
+
+  displayTags() {
+    return this.test.map((tag) => (
+      <span className="badge badge-secondary">{tag}</span>
+    ));
+  }
+}

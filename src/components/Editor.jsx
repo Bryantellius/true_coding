@@ -6,12 +6,15 @@ import "ace-builds/src-noconflict/mode-javascript";
 // import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-vibrant_ink";
 
-const Editor = ({ run, save }) => {
+const Editor = ({ run, q }) => {
   const [currentCode, setCurrentCode] = React.useState("");
   const editorMode = "javascript";
 
   return (
     <>
+      <div className="bg-dark">
+        <p>{q.displayQ()}</p>
+      </div>
       <AceEditor
         name={editorMode + "Editor"}
         mode={editorMode}
@@ -19,7 +22,6 @@ const Editor = ({ run, save }) => {
         value={currentCode}
         onChange={(e) => {
           setCurrentCode(e);
-          save(e);
         }}
         fontSize={18}
         editorProps={{ $blockScrolling: true }}
@@ -30,11 +32,8 @@ const Editor = ({ run, save }) => {
           enableSnippets: true,
         }}
       />
-      <div className="editor-options-panel">
-        <button
-          className="btn btn-success"
-          onClick={() => run(currentCode)}
-        >
+      <div className="editor-button-panel">
+        <button className="btn btn-success" onClick={() => run(currentCode)}>
           Run
         </button>
         <button
