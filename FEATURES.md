@@ -2,6 +2,9 @@
 
 ## Next Up
 
+- Routes
+  - QandA
+  - Editor
 - In-browser editor component [!]
   - Practice problems
   - Tests
