@@ -3,11 +3,11 @@
 ## Next Up
 
 - Routes
-  - QandA
-  - Editor
+  - QandA <span>&#10003;</span>
+  - Editor <span>&#10003;</span>
 - In-browser editor component [!]
-  - Practice problems
-  - Tests
+  - Practice problems <span>&#10003;</span>
+  - Tests <span>&#10003;</span>
 - MORE QUESTIONS
 - Change Data storage (it will quickly become unruly where it is)
 - Category filtering
