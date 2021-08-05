@@ -1,4 +1,5 @@
 import { JSChallenge } from "./classes";
+import _ from "lodash/lang";
 
 const data = [
   new JSChallenge(
@@ -13,27 +14,70 @@ const data = [
   ),
   new JSChallenge(
     "Write a function called 'toProper' that takes in a string value, and returns the string with the first letter uppercased.",
-    { func: "toProper", params: [`"ben"`], expected: `"Ben"`, isObj: false },
+    { func: "toProper", params: ["ben"], expected: "Ben", isObj: false },
     ["String", "Functions"]
+  ),
+  new JSChallenge(
+    "FIZZBUZZ! Write a function called 'fizzbuzz' that takes in a number. Your function should return an array of numbers that increment from 1 to 'n' (number parameter). If the number is divisible by 3, 'FIZZ' should be the value instead of 3. If the number is divisible by 5, 'BUZZ' should be the value instead of 5. Only if the number is divisible by both 3 and 5 should 'FIZZBUZZ' be the value.",
+    {
+      func: "fizzbuzz",
+      params: [15],
+      expected: [
+        1,
+        2,
+        "FIZZ",
+        4,
+        "BUZZ",
+        "FIZZ",
+        7,
+        8,
+        "FIZZ",
+        "BUZZ",
+        11,
+        "FIZZ",
+        13,
+        14,
+        "FIZZBUZZ",
+      ],
+      isObj: true,
+    },
+    ["Algorithms", "Functions"]
   ),
 ];
 
 export const test = (func, params, expected, isObj) => {
-  try {
-    return `
-    console.log("@TEST@");
-
-    if (${func}(${params.join(",")}) === ${expected}) {
-      console.log(
-        \`\n\u2713 \n- PASSED \n- Expected ${expected}\`
-      );
-    } else {
-      console.log(
-        \`\n\u2716 \n- FAILED \n- Expected ${expected}\`
-      );
-    }`; 
-  } catch (error) {
-    return console.error(error);
+  if (!isObj) {
+    try {
+      if (_.isEqual(window[func](params.join(",")), expected)) {
+        return `
+      console.log("@TEST@");
+        console.log(
+          \`\n\u2713 \n- PASSED \n- Expected ${expected}\`
+        );`;
+      } else {
+        return `
+      console.log("@TEST@");
+        console.log(
+          \`\n\u2717 \n- FAILED \n- Expected ${expected}\`
+        );`;
+      }
+    } catch (error) {
+      return `console.error(\`${error}\`)`;
+    }
+  } else {
+    try {
+      if (_.isEqual(window[func](params.join(",")), expected)) {
+        return `console.log("@TEST@")
+        \n\u2713 \n- PASSED \n- Expected ${expected}\`
+        `;
+      } else {
+        return `console.log("@TEST@")
+        \n\u2717 \n- FAILED \n- Expected ${expected}\`
+        `;
+      }
+    } catch (error) {
+      return `console.error(\`${error}\`)`;
+    }
   }
 };
 

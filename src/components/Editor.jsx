@@ -11,9 +11,9 @@ const Editor = ({ q, currentCode, setCurrentCode }) => {
 
   return (
     <>
-      <div className="bg-dark w-100">
-        <small className="small border-bottom border-dark">Question</small>
-        <p>{q.displayQ()}</p>
+      <div className="bg-dark border-bottom border-light w-100">
+        <small className="small border-bottom border-light">Question</small>
+        <p className="small px-3 text-start">{q.displayQ()}</p>
       </div>
       <AceEditor
         name={editorMode + "Editor"}
