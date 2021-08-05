@@ -96,6 +96,10 @@ strong {
   min-height: 400px;
 }
 
+.squared {
+  border-radius: 0px
+}
+
 .editor * {
   transition: none;
 }

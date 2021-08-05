@@ -4,20 +4,21 @@ import "ace-builds/src-noconflict/mode-javascript";
 // Will be used when html and css support are added
 // import "ace-builds/src-noconflict/mode-html";
 // import "ace-builds/src-noconflict/mode-css";
-import "ace-builds/src-noconflict/theme-vibrant_ink";
+import "ace-builds/src-noconflict/theme-dracula";
 
-const Editor = ({ run, q, currentCode, setCurrentCode }) => {
+const Editor = ({ q, currentCode, setCurrentCode }) => {
   const editorMode = "javascript";
 
   return (
     <>
-      <div className="bg-dark" aria-live="polite">
+      <div className="bg-dark w-100">
+        <small className="small border-bottom border-dark">Question</small>
         <p>{q.displayQ()}</p>
       </div>
       <AceEditor
         name={editorMode + "Editor"}
         mode={editorMode}
-        theme="vibrant_ink"
+        theme="dracula"
         value={currentCode}
         onChange={(e) => {
           setCurrentCode(e);

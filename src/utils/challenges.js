@@ -19,16 +19,22 @@ const data = [
 ];
 
 export const test = (func, params, expected, isObj) => {
-  return `
-  if (${func}(${params.join(",")}) === ${expected}) {
-    console.log(
-      \`\n\u2713 \n- PASSED \n- Expected ${expected}\`
-    );
-  } else {
-    console.log(
-      \`\n\u2716 \n- FAILED \n- Expected ${expected}\`
-    );
-  }`;
+  try {
+    return `
+    console.log("@TEST@");
+
+    if (${func}(${params.join(",")}) === ${expected}) {
+      console.log(
+        \`\n\u2713 \n- PASSED \n- Expected ${expected}\`
+      );
+    } else {
+      console.log(
+        \`\n\u2716 \n- FAILED \n- Expected ${expected}\`
+      );
+    }`; 
+  } catch (error) {
+    return console.error(error);
+  }
 };
 
 export default data;

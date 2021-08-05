@@ -45,6 +45,7 @@ function QEditor() {
 
   function resetIndicators(newIdx) {
     setCurrentCode("// Start Here");
+    console.clear();
     setUrl(
       getGeneratedPageURL(
         {
@@ -142,7 +143,10 @@ function QEditor() {
       </aside>
 
       {/* Main Column */}
-      <main className="container__main d-flex flex-column justify-content-center align-items-center h-100">
+      <main
+        className="container__main d-flex flex-column justify-content-center align-items-center h-100"
+        aria-live="polite"
+      >
         <Editor
           run={run}
           q={qa}
@@ -156,12 +160,17 @@ function QEditor() {
           src={url}
           title="Editor Output"
         ></iframe>
-        <div className="editor-button-panel">
-          <button className="btn btn-success" onClick={() => run(currentCode)}>
+        <div className="editor-button-panel bg-dark w-100">
+          <button
+            className="btn squared btn-success"
+            aria-label="Run Code"
+            onClick={() => run(currentCode)}
+          >
             Run
           </button>
           <button
-            className="btn btn-secondary"
+            className="btn squared btn-secondary"
+            aria-label="Copy Code to Clipboard"
             onClick={() => navigator.clipboard.writeText(currentCode)}
           >
             Copy

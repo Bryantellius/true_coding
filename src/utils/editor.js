@@ -51,7 +51,7 @@ export const getGeneratedPageURL = ({ html, css, js }, editorMode, qa) => {
     }
     console.logs.forEach((log, idx) => {
       const newLine = document.createElement("p");
-      newLine.textContent = "> | " + log;
+      newLine.innerHTML = "> | " + log;
       document.getElementById('output').appendChild(newLine);
     })`;
 
