@@ -6,13 +6,12 @@ import "ace-builds/src-noconflict/mode-javascript";
 // import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-vibrant_ink";
 
-const Editor = ({ run, q }) => {
-  const [currentCode, setCurrentCode] = React.useState("");
+const Editor = ({ run, q, currentCode, setCurrentCode }) => {
   const editorMode = "javascript";
 
   return (
     <>
-      <div className="bg-dark">
+      <div className="bg-dark" aria-live="polite">
         <p>{q.displayQ()}</p>
       </div>
       <AceEditor
@@ -32,17 +31,6 @@ const Editor = ({ run, q }) => {
           enableSnippets: true,
         }}
       />
-      <div className="editor-button-panel">
-        <button className="btn btn-success" onClick={() => run(currentCode)}>
-          Run
-        </button>
-        <button
-          className="btn btn-secondary"
-          onClick={() => navigator.clipboard.writeText(currentCode)}
-        >
-          Copy
-        </button>
-      </div>
     </>
   );
 };

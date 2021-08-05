@@ -14,9 +14,10 @@ function QEditor() {
   const [showSidebar, setShowSidebar] = useState(false);
   const [feedback, setFeedback] = useState("");
   const qa = challenges[currentIndex];
-  const prev = currentIndex !== 0 ? currentIndex - 1 : challenges.length - 1;
-  const next = currentIndex < challenges.length - 1 ? currentIndex + 1 : 0;
-  const [editorMode, setEditorMode] = useState("javascript");
+  // const prev = currentIndex !== 0 ? currentIndex - 1 : challenges.length - 1;
+  // const next = currentIndex < challenges.length - 1 ? currentIndex + 1 : 0;
+  const editorMode = "javascript";
+  const [currentCode, setCurrentCode] = useState("// Start Here");
   const [url, setUrl] = useState(
     getGeneratedPageURL(
       {
@@ -36,26 +37,28 @@ function QEditor() {
           css,
           js: currentCode,
         },
-        editorMode
+        editorMode,
+        qa
       )
     );
   };
 
-  function checkAnswer(e) {
-    e.preventDefault();
-    const a = document.querySelector("#answer");
-    setFeedback(qa.evaluateAnswer(a.value));
-    setShowFeedback(true);
-  }
-
   function resetIndicators(newIdx) {
-    const a = document.querySelector("#answer");
-    a.value = "";
+    setCurrentCode("// Start Here");
+    setUrl(
+      getGeneratedPageURL(
+        {
+          html: "",
+          css: "",
+          js: 'console.log("Here we go!")',
+        },
+        editorMode
+      )
+    );
     setShowFeedback(false);
     setFeedback("");
     setCurrentIndex(newIdx);
     setShowSidebar(false);
-    a.focus();
   }
 
   function toggleSidebar(e) {
@@ -140,7 +143,12 @@ function QEditor() {
 
       {/* Main Column */}
       <main className="container__main d-flex flex-column justify-content-center align-items-center h-100">
-        <Editor run={run} q={qa} />
+        <Editor
+          run={run}
+          q={qa}
+          currentCode={currentCode}
+          setCurrentCode={setCurrentCode}
+        />
         <iframe
           id="editor_output"
           style={{ width: "100%" }}
@@ -148,6 +156,17 @@ function QEditor() {
           src={url}
           title="Editor Output"
         ></iframe>
+        <div className="editor-button-panel">
+          <button className="btn btn-success" onClick={() => run(currentCode)}>
+            Run
+          </button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigator.clipboard.writeText(currentCode)}
+          >
+            Copy
+          </button>
+        </div>
       </main>
     </div>
   );

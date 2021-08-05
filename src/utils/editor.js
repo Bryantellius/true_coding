@@ -1,4 +1,6 @@
-export const getGeneratedPageURL = ({ html, css, js }, editorMode) => {
+import { test } from "../utils/challenges";
+
+export const getGeneratedPageURL = ({ html, css, js }, editorMode, qa) => {
   const getBlobURL = (code, type) => {
     const blob = new Blob([code], { type });
     return URL.createObjectURL(blob);
@@ -42,7 +44,8 @@ export const getGeneratedPageURL = ({ html, css, js }, editorMode) => {
     console.debugs.push(Array.from(arguments));
   };
     try {
-      ${js} 
+      ${js}
+      ${qa ? test(qa.test.func, qa.test.params, qa.test.expected, qa.test.obj) : null} 
     } catch(error) {
       console.log(error)
     }
