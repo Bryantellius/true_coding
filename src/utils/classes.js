@@ -32,10 +32,7 @@ export class JSChallenge {
   }
 
   evaluateAnswer(a) {
-    if (
-      typeof this.test.expected == "array" ||
-      typeof this.test.expected == "object"
-    ) {
+    if (typeof this.test.expected == "object") {
       if (_.isEqual(JSON.parse(a.slice(0, a.length - 2)), this.test.expected)) {
         return `\nRESULT: Challenge Passed!`;
       } else return `\nRESULT: Challenge Failed...`;
