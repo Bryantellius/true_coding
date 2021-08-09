@@ -11,12 +11,12 @@ const Editor = ({ q, currentCode, setCurrentCode }) => {
 
   return (
     <>
-      <div className="bg-dark border-bottom border-light w-100">
+      <div className="prompt-container bg-dark border-bottom border-light w-100">
         <small className="small border-bottom border-light">Question</small>
         <p className="small px-3 text-start">{q.displayQ()}</p>
       </div>
       <AceEditor
-        name={editorMode + "Editor"}
+        name="aceEditor"
         mode={editorMode}
         theme="dracula"
         value={currentCode}
@@ -24,12 +24,13 @@ const Editor = ({ q, currentCode, setCurrentCode }) => {
           setCurrentCode(e);
         }}
         fontSize={18}
-        editorProps={{ $blockScrolling: true }}
+        editorProps={{ $blockScrolling: false }}
         className="w-100 editor"
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           enableSnippets: true,
+          wrapBehavioursEnabled: true
         }}
       />
     </>

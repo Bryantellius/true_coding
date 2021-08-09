@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Editor from "../components/Editor";
 import challenges from "../utils/challenges";
-import { getGeneratedPageURL } from "../utils/editor";
+import { Accesstoken, apiService } from "../utils/apiService";
 
 let screenWidth = window.screenX;
 
@@ -12,52 +12,53 @@ function QEditor() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
-  const [feedback, setFeedback] = useState("");
+  const [output, setOutput] = useState("Hello World!");
   const qa = challenges[currentIndex];
   // const prev = currentIndex !== 0 ? currentIndex - 1 : challenges.length - 1;
   // const next = currentIndex < challenges.length - 1 ? currentIndex + 1 : 0;
   const editorMode = "javascript";
   const [currentCode, setCurrentCode] = useState("// Start Here");
-  const [url, setUrl] = useState(
-    getGeneratedPageURL(
-      {
-        html: "",
-        css: "",
-        js: 'console.log("Here we go!")',
-      },
-      editorMode
-    )
-  );
 
-  const run = (currentCode, html, css, javascript) => {
-    setUrl(
-      getGeneratedPageURL(
+  const run = async (currentCode) => {
+    let body = {
+      files: [
         {
-          html,
-          css,
-          js: currentCode,
+          name: "main",
+          content:
+            currentCode + "\n" + qa.test.case + ";\n console.log(result);",
         },
-        editorMode,
-        qa
-      )
-    );
+      ],
+    };
+    try {
+      let res = await fetch(`https://glot.io/api/run/${editorMode}/latest`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Token " + Accesstoken,
+        },
+        body: JSON.stringify(body),
+      });
+      let data = await res.json();
+
+      if (data.error || !data) {
+        setOutput(data.stderr || "An error occurred with your code :(");
+      } else {
+        let testedOutput = qa.evaluateAnswer(
+          data.stdout.split("\n")[data.stdout.length - 1]
+        );
+        console.log(data.stdout + "\n" + testedOutput);
+        setOutput(data.stdout + "\n" + testedOutput);
+      }
+    } catch (error) {
+      console.error("Failed to compile test code.");
+    }
   };
 
   function resetIndicators(newIdx) {
     setCurrentCode("// Start Here");
     console.clear();
-    setUrl(
-      getGeneratedPageURL(
-        {
-          html: "",
-          css: "",
-          js: 'console.log("Here we go!")',
-        },
-        editorMode
-      )
-    );
     setShowFeedback(false);
-    setFeedback("");
+    setOutput("");
     setCurrentIndex(newIdx);
     setShowSidebar(false);
   }
@@ -136,7 +137,7 @@ function QEditor() {
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
-              {q.displayQ()}
+              {q.displayQ().slice(0, 50) + "..."}
             </li>
           ))}
         </ul>
@@ -153,13 +154,13 @@ function QEditor() {
           currentCode={currentCode}
           setCurrentCode={setCurrentCode}
         />
-        <iframe
+        <div
           id="editor_output"
-          style={{ width: "100%" }}
-          className="output-container"
-          src={url}
+          className="output-container w-100"
           title="Editor Output"
-        ></iframe>
+        >
+          {output}
+        </div>
         <div className="editor-button-panel bg-dark w-100">
           <button
             className="btn squared btn-success"

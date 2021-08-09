@@ -1,3 +1,5 @@
+import _ from "lodash/lang";
+
 export class QandA {
   constructor(q, a, category = "general", sensitive = true) {
     this.q = q;
@@ -30,7 +32,18 @@ export class JSChallenge {
   }
 
   evaluateAnswer(a) {
-    return `\nRESULT: ${a(...this.test.params) || "No returned value :/"}`;
+    if (
+      typeof this.test.expected == "array" ||
+      typeof this.test.expected == "object"
+    ) {
+      if (_.isEqual(JSON.parse(a.slice(0, a.length - 2)), this.test.expected)) {
+        return `\nRESULT: Challenge Passed!`;
+      } else return `\nRESULT: Challenge Failed...`;
+    } else {
+      if (a.slice(0, a.length - 2) == String(this.test.expected)) {
+        return `\nRESULT: Challenge Passed!`;
+      } else return `\nRESULT: Challenge Failed...`;
+    }
   }
 
   displayQ() {
