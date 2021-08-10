@@ -6,14 +6,13 @@ import "ace-builds/src-noconflict/mode-javascript";
 // import "ace-builds/src-noconflict/mode-css";
 import "ace-builds/src-noconflict/theme-dracula";
 
-const Editor = ({ q, currentCode, setCurrentCode }) => {
-  const editorMode = "javascript";
-
+const Editor = ({ q, currentCode, setCurrentCode, editorMode }) => {
   return (
     <>
-      <div className="prompt-container bg-dark border-bottom border-light w-100">
+      <div className="prompt-container px-3 text-start bg-dark border-bottom border-light w-100">
         <small className="small border-bottom border-light">Question</small>
-        <p className="small px-3 text-start">{q.displayQ()}</p>
+        <p className="small">{q.displayQ()}</p>
+        {q.displayTags()}
       </div>
       <AceEditor
         name="aceEditor"
@@ -30,7 +29,7 @@ const Editor = ({ q, currentCode, setCurrentCode }) => {
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
           enableSnippets: true,
-          wrapBehavioursEnabled: true
+          wrapBehavioursEnabled: true,
         }}
       />
     </>

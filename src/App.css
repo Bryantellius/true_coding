@@ -35,7 +35,7 @@ pre {
   color: var(--primary);
   background-color: var(--dark);
   text-align: left;
-  padding: 1rem;
+  padding: 0 1rem;
   border: 0.25px dashed white;
   height: 17vh;
   overflow-y: scroll;

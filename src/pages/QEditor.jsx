@@ -2,55 +2,61 @@
 import { useState } from "react";
 import Editor from "../components/Editor";
 import challenges from "../utils/challenges";
-import { Accesstoken, apiService } from "../utils/apiService";
+import { apiService } from "../utils/apiService";
+import { useParams } from "react-router";
 
 let screenWidth = window.screenX;
 
 window.addEventListener("resize", () => (screenWidth = window.screenX));
 
 function QEditor() {
+  const { language } = useParams();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const qa = challenges[language][currentIndex];
+
   const [showFeedback, setShowFeedback] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [output, setOutput] = useState("Hello World!");
-  const qa = challenges[currentIndex];
   // const prev = currentIndex !== 0 ? currentIndex - 1 : challenges.length - 1;
   // const next = currentIndex < challenges.length - 1 ? currentIndex + 1 : 0;
-  const editorMode = "javascript";
-  const [currentCode, setCurrentCode] = useState("// Start Here");
+  const [currentCode, setCurrentCode] = useState(qa.starter);
 
   const run = async (currentCode) => {
     let body = {
       files: [
         {
-          name: "main",
-          content:
-            currentCode + "\n" + qa.test.case + ";\n console.log(result);",
+          name: "main.cs",
+          content: currentCode + qa.appendTest,
         },
       ],
     };
     try {
-      let res = await fetch(`https://glot.io/api/run/${editorMode}/latest`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Token " + Accesstoken,
-        },
-        body: JSON.stringify(body),
-      });
-      let data = await res.json();
+      let data = await apiService(
+        `http://localhost:3001/api/run/${language}`,
+        "POST",
+        body
+      );
 
       if (data.error || !data) {
-        setOutput(data.stderr || "An error occurred with your code :(");
-      } else {
-        let testedOutput = qa.evaluateAnswer(
-          data.stdout.split("\n")[data.stdout.length - 1]
+        setOutput(
+          <code className="d-block">
+            {data.stderr || "An error occurred with your code :("}
+          </code>
         );
-        console.log(data.stdout + "\n" + testedOutput);
-        setOutput(data.stdout + "\n" + testedOutput);
+      } else {
+        let dataArr = data.stdout.split("\n");
+        let testedOutput = qa.evaluateAnswer(dataArr[dataArr.length - 2]);
+        console.log(data.stdout + testedOutput);
+        setOutput(
+          (data.stdout + testedOutput).split("\n").map((ele, idx) => (
+            <code key={idx} className="d-block">
+              {ele}
+            </code>
+          ))
+        );
       }
     } catch (error) {
-      console.error("Failed to compile test code.");
+      console.error(error || "Failed to compile test code.");
     }
   };
 
@@ -115,7 +121,7 @@ function QEditor() {
           </svg>
         </p>
         <ul className="list-group-flush px-2">
-          {challenges.map((q, idx) => (
+          {challenges[language].map((q, idx) => (
             <li
               key={idx}
               className={`list-group-item side_item px-4 text-start ${
@@ -151,6 +157,7 @@ function QEditor() {
         <Editor
           run={run}
           q={qa}
+          editorMode={language}
           currentCode={currentCode}
           setCurrentCode={setCurrentCode}
         />

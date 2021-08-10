@@ -29,6 +29,9 @@ export class JSChallenge {
     this.q = q;
     this.test = test;
     this.tags = tags;
+    this.starter = "// Start here";
+    this.appendTest =
+      "\n let result = " + this.test.case + ";\n console.log(result);";
   }
 
   evaluateAnswer(a) {
@@ -37,7 +40,7 @@ export class JSChallenge {
         return `\nRESULT: Challenge Passed!`;
       } else return `\nRESULT: Challenge Failed...`;
     } else {
-      if (a.slice(0, a.length - 2) == String(this.test.expected)) {
+      if (a == String(this.test.expected)) {
         return `\nRESULT: Challenge Passed!`;
       } else return `\nRESULT: Challenge Failed...`;
     }
@@ -48,8 +51,41 @@ export class JSChallenge {
   }
 
   displayTags() {
-    return this.test.map((tag) => (
-      <span className="badge badge-secondary">{tag}</span>
+    return this.tags.map((tag) => (
+      <span className="badge badge-primary mx-1">{tag}</span>
+    ));
+  }
+}
+
+export class CSChallenge {
+  constructor(q, test, tags = []) {
+    this.q = q;
+    this.test = test;
+    this.tags = tags;
+    this.starter = `using System;\nclass Program {\n\t// Start Here\n\n}`;
+    this.appendTest =
+      `\n static void Test() { Console.WriteLine(${this.test.case});\n}\n}`;
+  }
+
+  evaluateAnswer(a) {
+    if (typeof this.test.expected == "object") {
+      if (_.isEqual(JSON.parse(a.slice(0, a.length - 2)), this.test.expected)) {
+        return `\nRESULT: Challenge Passed!`;
+      } else return `\nRESULT: Challenge Failed...`;
+    } else {
+      if (a == String(this.test.expected)) {
+        return `\nRESULT: Challenge Passed!`;
+      } else return `\nRESULT: Challenge Failed...`;
+    }
+  }
+
+  displayQ() {
+    return this.q;
+  }
+
+  displayTags() {
+    return this.tags.map((tag) => (
+      <span className="badge badge-primary mx-1">{tag}</span>
     ));
   }
 }

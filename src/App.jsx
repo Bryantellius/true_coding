@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -16,6 +16,9 @@ function App() {
         </Route>
         <Route exact path="/code/:language">
           <QEditor />
+        </Route>
+        <Route exact path="/code/*">
+          <Redirect to={"/code/javascript"} />
         </Route>
       </Switch>
     </div>
