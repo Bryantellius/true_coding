@@ -1,5 +1,6 @@
 /* eslint-disable eqeqeq */
 import { useState } from "react";
+import { useParams } from "react-router";
 import data from "../utils/questions";
 
 let screenWidth = window.screenX;
@@ -7,13 +8,15 @@ let screenWidth = window.screenX;
 window.addEventListener("resize", () => (screenWidth = window.screenX));
 
 function QA() {
+  const { language } = useParams();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [feedback, setFeedback] = useState("");
-  const qa = data[currentIndex];
-  const prev = currentIndex !== 0 ? currentIndex - 1 : data.length - 1;
-  const next = currentIndex < data.length - 1 ? currentIndex + 1 : 0;
+  const qa = data[language][currentIndex];
+  const prev = currentIndex !== 0 ? currentIndex - 1 : data[language].length - 1;
+  const next = currentIndex < data[language].length - 1 ? currentIndex + 1 : 0;
 
   function checkAnswer(e) {
     e.preventDefault();
@@ -84,7 +87,7 @@ function QA() {
           </svg>
         </p>
         <ul className="list-group-flush px-2">
-          {data.map((q, idx) => (
+          {data[language].map((q, idx) => (
             <li
               key={idx}
               className={`list-group-item side_item px-4 text-start ${

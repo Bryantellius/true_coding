@@ -11,13 +11,16 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path="/coding-questions">
+        <Route exact path="/coding-questions/:language">
           <QA />
+        </Route>
+        <Route exact path="/coding-questions">
+          <Redirect to={"/coding-questions/javascript"} />
         </Route>
         <Route exact path="/code/:language">
           <QEditor />
         </Route>
-        <Route exact path="/code/*">
+        <Route exact path="/code">
           <Redirect to={"/code/javascript"} />
         </Route>
       </Switch>
