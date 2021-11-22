@@ -1,31 +1,23 @@
 /* eslint-disable eqeqeq */
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import "./App.css";
+import "./styles/App.css";
 import Navbar from "./components/Navbar";
 import QA from "./pages/QA";
+import Home from "./pages/Home";
 import QEditor from "./pages/QEditor";
+import AppLayout from "./components/layouts/AppLayout";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Navbar />
-      <Switch>
-        <Route exact path="/coding-questions/:language">
-          <QA />
-        </Route>
-        <Route exact path="/coding-questions">
-          <Redirect to={"/coding-questions/javascript"} />
-        </Route>
-        <Route exact path="/code/:language">
-          <QEditor />
-        </Route>
-        <Route exact path="/code">
-          <Redirect to={"/code/javascript"} />
-        </Route>
-      </Switch>
-    </div>
+    <AppLayout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="coding-questions/:language" element={<QA />} />
+        <Route path="code/:language" element={<QEditor />} />
+      </Routes>
+    </AppLayout>
   );
-}
+};
 
 export default App;

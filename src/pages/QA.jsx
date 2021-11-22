@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useParams } from "react-router-dom";
 import data from "../utils/questions";
 
 let screenWidth = window.screenX;

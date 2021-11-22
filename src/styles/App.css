@@ -1,0 +1,123 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+:root {
+  --tc-primary: #0094c8;
+  --tc-secondary: #8b8a8d;
+  --tc-dark-primary: #1d2d50;
+  --tc-dark-secondary: #133b5c;
+  --tc-dark-info: #1e5f74;
+  --tc-dark-warning: #fcdab7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  background-image: url(../assets/svg/clouds.svg);
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+  height: fit-content;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.rotate-half {
+  transform: rotate(90deg);
+}
+
+.h-10vh {
+  max-height: 10vh;
+}
+
+main.container {
+  min-height: 100vh;
+}
+
+nav.navbar {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+nav .navbar-item {
+  color: var(--tc-secondary);
+}
+
+nav .navbar-item:hover {
+  background-color: transparent;
+}
+
+.isometric-card {
+  margin: 0 auto;
+  transform: rotateX(51deg) rotateZ(43deg);
+  transform-style: preserve-3d;
+  background-color: #fcfcfc;
+  will-change: transform;
+  width: 240px;
+  height: 320px;
+  border-radius: 2rem;
+  box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+    28px 28px 28px 0 rgba(34, 33, 81, 0.25);
+  transition: 0.4s ease-in-out transform, 0.3s ease-in-out box-shadow;
+}
+
+.isometric-card:hover {
+  transform: translate3d(0px, -16px, 0px) rotateX(51deg) rotateZ(43deg);
+  box-shadow: 1px 1px 0 1px #f9f9fb, -1px 0 28px 0 rgba(34, 33, 81, 0.01),
+    54px 54px 28px -10px rgba(34, 33, 81, 0.15);
+}
+
+/* SCROLL BAR */
+
+/* Width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ANIMATIONS */
+
+.appear {
+  animation: Appear 1s;
+}
+
+@keyframes Appear {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
